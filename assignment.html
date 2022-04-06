@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>EMPLOYEE PAGE</title>
+    </head>
+    <h1 style="text-align:center">EMPLOYEE PAGE</h1>
+    <style>
+
+        td, th {  
+        border: 2px solid;  
+        text-align: left;  
+        padding: 8px;  
+        } 
+
+        tr:nth-child(even) {  
+        background-color: #696969;  
+        }
+        
+        tr:nth-child(odd) {  
+        background-color: #FFFFFF;  
+        }
+
+        tr:hover {
+        background-color: rgb(242, 242, 12);
+}
+
+    </style>
+    <body>
+        <table style="width:100%" id="myTable" class="table">
+            <thead>
+            <tr>
+                <th>Employee Id</th>
+                <th>Employee Name</th>
+                <th>Email Address</th>
+                <th>Contact number</th>
+            </tr>
+            </thead>
+            <tr>
+                <td>1001</td>
+                <td>Vaibhav Mishra</td>
+                <td>Delhi</td>
+                <td>9874563210</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </tr>
+            <tr>
+                <td>1002</td>
+                <td>Rajesh Sharma</td>
+                <td>Noida</td>
+                <td>8874563210</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </tr>
+            <tr>
+                <td>1003</td>
+                <td>Saurabh Saxena</td>
+                <td>Gaziabad</td>
+                <td>7874563210</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </tr>
+            <tr>
+                <td>1004</td>
+                <td>Anuj Kapoor</td>
+                <td>Gurugram</td>
+                <td>9454563210</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </tr>
+            <tr>
+                <td>1005</td>
+                <td>Atul Singh</td>
+                <td>Dehradun</td>
+                <td>7124563210</td>
+                <td><input type="button" value="Delete" onclick="deleteRow(this)"/></td>
+            </tr>
+        </table>
+        <div style="text-align:center">
+        <button type = "button">Load data</button>
+        </div>
+    </body>
+    <script>
+        th = document.getElementsByTagName('th');
+        
+        for(let c=0; c < th.length; c++){
+        
+            th[c].addEventListener('click',item(c))
+        }
+        
+        
+        function item(c){
+        
+            return function(){
+              console.log(c)
+              sortTable(c)
+            }
+        }
+        
+        
+        function sortTable(c) {
+          var table, rows, switching, i, x, y, shouldSwitch;
+          table = document.getElementById("myTable");
+          switching = true;
+          
+          while (switching) {
+            
+            switching = false;
+            rows = table.rows;
+            for (i = 1; i < (rows.length - 1); i++) {
+              shouldSwitch = false;
+
+              x = rows[i].getElementsByTagName("TD")[c];
+              y = rows[i + 1].getElementsByTagName("TD")[c];
+              
+              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                shouldSwitch = true;
+                break;
+              }
+            }
+            if (shouldSwitch) {
+              
+              rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+              switching = true;
+            }
+          }
+        }
+
+        function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+
+        </script>
+</html>
